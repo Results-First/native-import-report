@@ -10,6 +10,9 @@ ARCHIVE = ROOT / "native-import-report-windows-x64-source.zip"
 
 def main():
     files = {"compare.py", "setup.py", "demo.py", "package.json", "package-lock.json", "README.md", "LICENSE", "THIRD-PARTY.md"}
+    files.update({'setup_native.py','check_native.py','native_exports.py','demo_native.py',
+                  'verify_native.py','test_support.py','NATIVE-PROTOTYPE.md',
+                  'test_native.py','verify_native_portable.py','build_release.py'})
     files.update(re.findall(r"\]\((evidence/[^)]+)\)", (ROOT / "README.md").read_text(encoding="utf-8")))
     for name in files:
         target = (ROOT / name).resolve()
@@ -17,14 +20,18 @@ def main():
             raise ValueError(f"Missing or invalid release file: {name}")
     with zipfile.ZipFile(ARCHIVE, "w", compression=zipfile.ZIP_DEFLATED) as bundle:
         for name in sorted(files):
-            bundle.write(ROOT / name, "native-import-report/" + name)
+            info = zipfile.ZipInfo("native-import-report/" + name, date_time=(2026,10,14,0,0,0))
+            info.compress_type = zipfile.ZIP_DEFLATED
+            bundle.writestr(info, (ROOT / name).read_bytes())
     with zipfile.ZipFile(ARCHIVE) as bundle:
         if bundle.testzip() is not None:
             raise ValueError("Release archive integrity check failed.")
         for name in files:
             if bundle.read("native-import-report/" + name) != (ROOT / name).read_bytes():
                 raise ValueError(f"Release content mismatch: {name}")
+    (ROOT / 'evidence').mkdir(exist_ok=True)
     compare.dump(ROOT / "evidence/distribution.json", {"archive": ARCHIVE.name, "sha256": compare.digest(ARCHIVE), "bytes": ARCHIVE.stat().st_size, "files": sorted(files), "archive_verified": True})
+    (ROOT / 'SHA256SUMS.txt').write_text(compare.digest(ARCHIVE) + '  ' + ARCHIVE.name + '\n', encoding='utf-8')
     print(f"Verified release: {ARCHIVE}")
 
 

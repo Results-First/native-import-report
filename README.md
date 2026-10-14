@@ -4,6 +4,8 @@ Compare the native-library import declarations in two compiled .NET DLLs without
 
 **Free evaluation release.** This is a static declaration comparison, not a runtime compatibility or security verdict.
 
+The [native import/export checker](NATIVE-PROTOTYPE.md) checks declarations against an explicitly supplied native library. It requires Windows x64 and Python 3.11. Run `python setup_native.py`, then `python demo_native.py`. The default Wasmtime example correctly exits 3 because it detects a missing name. Both workflows are included in the v0.2 evaluation source ZIP.
+
 ## Quick start
 
 Requires Windows x64 and Python 3.10 or newer. Python 3.11 or newer is recommended for a new installation. No preinstalled Node, npm, REA, .NET SDK, account or API key is needed.

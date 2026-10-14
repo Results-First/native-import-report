@@ -8,3 +8,5 @@ The release ZIP contains this project's source, not bundled Node, REA, pefix or 
 - Development verification downloads pefix 1.0.2 from its official GitHub release and additional public NuGet fixtures. pefix: https://github.com/FeathBow/pefix
 
 All target DLL analysis is static. Test inputs are not executed.
+
+The local native-check prototype additionally downloads LIEF 0.17.3 (Apache-2.0) from PyPI into `.native-tools`, verified against a pinned wheel SHA-256. Upstream license: https://github.com/lief-project/LIEF/blob/0.17.3/LICENSE. Its verification uses pefile 2024.8.26 (MIT), macholib 1.16.3 (MIT), and altgraph 0.17.4 (MIT) installed into `.test-tools/native-oracle`. Public Wasmtime, SkiaSharp, SQLitePCLRaw, and LibGit2Sharp NuGet packages retain their upstream notices in the original archives under `evidence/native-packages`. These dependencies and fixtures are not bundled in this project's source.

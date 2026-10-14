@@ -5,6 +5,7 @@ __pycache__/
 demo-inputs/
 demo-reports/
 .test-tools/
+.native-tools/
 evidence/
 *.zip
 SHA256SUMS.txt

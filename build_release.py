@@ -12,7 +12,8 @@ def main():
     files = {"compare.py", "setup.py", "demo.py", "package.json", "package-lock.json", "README.md", "LICENSE", "THIRD-PARTY.md"}
     files.update({'setup_native.py','check_native.py','native_exports.py','demo_native.py',
                   'verify_native.py','test_support.py','NATIVE-PROTOTYPE.md',
-                  'test_native.py','verify_native_portable.py','build_release.py'})
+                  'test_native.py','verify_native_portable.py','build_release.py',
+                  'test_setup.py','test_compare.py','verify_packages.py','verify_portable.py'})
     files.update(re.findall(r"\]\((evidence/[^)]+)\)", (ROOT / "README.md").read_text(encoding="utf-8")))
     for name in files:
         target = (ROOT / name).resolve()

@@ -1,0 +1,6 @@
+{
+  "name": "native-import-report-runtime",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": { "rea-agents": "6.5.0" }
+}
